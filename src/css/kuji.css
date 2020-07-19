@@ -1,0 +1,10 @@
+/* kuji-appのメインCSS */
+
+div.body {
+    padding-left: 15px;
+}
+
+input.setting {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

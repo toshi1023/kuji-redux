@@ -39,16 +39,7 @@ class SettingGame extends Component {
       this.props.nomalLottery(values)
     }
 
-    // result() {
-    //   return _.map(this.props.lottery, lottery => (
-    //     <p>{lottery.nomal}</p>  
-    //   ))
-    // }
-
-    // render(): TOPレベルのindex.jsにて仮想DOMを実際のDOMに変換されるようにするメソッド
     render() {
-
-      console.log(this.props.lottery.nomal)
       
       // ボタンのON,OFFカスタマイズ
       const { handleSubmit, pristine, submitting, invalid } = this.props

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { withRouter } from 'react-router';
 import _ from 'lodash'
 // import { Link } from 'react-router-dom'
 import '../css/kuji.css';
 import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField'
-import { nomalLottery } from '../actions';
+import { confirmLottery } from '../actions';
 
 
 class SettingGame extends Component {
@@ -36,7 +37,8 @@ class SettingGame extends Component {
     }
 
     onSubmit(values) {
-      this.props.nomalLottery(values)
+      this.props.confirmLottery(values)
+      this.props.history.push('/start')
     }
 
     render() {
@@ -68,10 +70,6 @@ class SettingGame extends Component {
                 </div>
               </div>      
             </form>
-
-            <div>
-              結果：{this.props.lottery.nomal}回で大当たり
-            </div>
           </React.Fragment>
       )
     }
@@ -89,11 +87,8 @@ const validate = values => {
   return errors
 }
 
-// nomalLotteryからの戻り値である当選時の抽選回数を受け取り
-const mapStateToProps = state => ({lottery: state.lottery})
+const mapDispatchToProps = ({confirmLottery})
 
-const mapDispatchToProps = ({nomalLottery})
-
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default withRouter(connect(null, mapDispatchToProps)(
   reduxForm({ validate, form: 'settingGameForm' })(SettingGame)
-)
+))

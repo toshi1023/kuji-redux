@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './css/kuji.css';
 import * as serviceWorker from './serviceWorker';
 import SettingGame from './components/setting_game';
-// import StartGame from './components/start_game';
+import StartGame from './components/start_game';
 
 const enhancer = applyMiddleware(thunk)
 const store = createStore(reducer, enhancer)
@@ -20,8 +20,8 @@ ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <Route path="/" component={SettingGame} />
-            {/* <Route path="/new" component={StartGame} /> */}
+            <Route exact path="/" component={SettingGame} />
+            <Route path="/start" component={StartGame} />
           </Switch>
         </BrowserRouter>
       </Provider>

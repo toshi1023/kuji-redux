@@ -1,14 +1,21 @@
 // アクションクリエイター
 
+export const ERROR = 'ERROR'
 export const CONFIRM_LOTTERY = 'CONFIRM_LOTTERY'
 export const NOMAL_LOTTERY = 'NOMAL_LOTTERY'
 export const ST_LOTTERY = 'ST_LOTTERY'
 
+
+export const error = () => dispatch => {
+  const response = "抽選確率を入力してください"
+  dispatch({type: ERROR, response})
+}
+
+// values: 入力フォーム(Field)の値
 export const confirmLottery = (values) => dispatch => {
   const response = values
   dispatch({type: CONFIRM_LOTTERY, response})
 }
-
 
 // values: 入力フォーム(Field)の値
 export const nomalLottery = (values) => dispatch => {
@@ -38,6 +45,7 @@ export const nomalLottery = (values) => dispatch => {
     dispatch({type: NOMAL_LOTTERY, response})
 }
 
+// values: 入力フォーム(Field)の値
 export const stLottery = (values) => dispatch => {
 
     var times

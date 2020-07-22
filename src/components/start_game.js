@@ -15,11 +15,23 @@ class StartGame extends Component {
   }
 
   start() {
-    this.props.nomalLottery(this.props.lottery.nomal)
+    // nomalの値が無ければホームへリダイレクト
+    if (!this.props.lottery.nomal) {
+      this.props.history.push('/')
+    }
+    if (this.props.lottery.nomal) {
+      this.props.nomalLottery(this.props.lottery.nomal)
+    }
   }
 
   stStart() {
-    this.props.stLottery(this.props.lottery)
+    // stの値が無ければホームへリダイレクト
+    if (!this.props.lottery.st) {
+      this.props.history.push('/')
+    }
+    if (this.props.lottery.st) {
+      this.props.stLottery(this.props.lottery)
+    }
   }
 
     render() {

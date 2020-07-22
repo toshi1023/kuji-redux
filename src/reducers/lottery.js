@@ -1,8 +1,10 @@
-import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY } from '../actions'
+import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR } from '../actions'
 
 export default (states = {}, action) => {
     // actionのタイプに応じて処理を分ける
     switch (action.type) {
+        case ERROR:
+            return {...states, error: action.response}
         case CONFIRM_LOTTERY:
             // actions/index.jsからのresponseデータをリターン
             return {

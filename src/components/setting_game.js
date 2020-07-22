@@ -8,20 +8,19 @@ import '../css/kuji.css';
 import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField'
 import { confirmLottery } from '../actions';
+import { error } from '../actions';
 
 
 class SettingGame extends Component {
 
     constructor(props) {
       super(props)
-      // onSubmit()メソッドをこのコンポーネントに紐づけている(決まり文句のようなもの)
+      
       this.onSubmit = this.onSubmit.bind(this)
     }
 
     renderField(field) {
-      // input: 入力値
-      // touched: 入力欄で何かしらのタッチがあったことを示す
-      // →tochedされたことをトリガーにエラーメッセージを発する
+      
       const { input, label, type, meta: { touched, error } } = field
 
       return (
@@ -29,9 +28,8 @@ class SettingGame extends Component {
               hintText={label}
               floatingLabelText={label}
               type={type}
-              errorText={touched && error} // バリデーションのメッセージも表示
+              errorText={touched && error}
               {...input}
-              // fullWidth={true}
           />
       )
     }
@@ -87,8 +85,11 @@ const validate = values => {
   return errors
 }
 
-const mapDispatchToProps = ({confirmLottery})
+const mapStateToProps = state => ({
+  lottery: state.lottery
+})
+const mapDispatchToProps = ({error, confirmLottery})
 
-export default withRouter(connect(null, mapDispatchToProps)(
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({ validate, form: 'settingGameForm' })(SettingGame)
 ))

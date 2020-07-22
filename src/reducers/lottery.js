@@ -1,4 +1,4 @@
-import { CONFIRM_LOTTERY, NOMAL_LOTTERY } from '../actions'
+import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY } from '../actions'
 
 export default (states = {}, action) => {
     // actionのタイプに応じて処理を分ける
@@ -13,8 +13,9 @@ export default (states = {}, action) => {
                 rush: action.response.rush,
             }
         case NOMAL_LOTTERY:
-            // actions/index.jsからのresponseデータをリターン
             return {...states, nomal_result: action.response}
+        case ST_LOTTERY:
+            return {...states, st_result: action.response}
         default:
             return states
     }

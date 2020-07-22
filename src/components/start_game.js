@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { nomalLottery } from '../actions';
+import { stLottery } from '../actions';
 import { Link } from 'react-router-dom'
 
 class StartGame extends Component {
 
   constructor(props) {
     super(props)
-    // start()メソッドをこのコンポーネントに紐づけ
+    // start()メソッドとstStart()メソッドをこのコンポーネントに紐づけ
     this.start = this.start.bind(this)
+    this.stStart = this.stStart.bind(this)
   }
 
   start() {
-    var values = this.props.lottery.nomal
-    this.props.nomalLottery(values)
+    this.props.nomalLottery(this.props.lottery.nomal)
+  }
+
+  stStart() {
+    this.props.stLottery(this.props.lottery)
   }
 
     render() {
@@ -35,9 +40,13 @@ class StartGame extends Component {
                 </div>
                 <div>
                 <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.start} disabled={ submitting } >Go</Button>
+                <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.stStart} disabled={ submitting } >ST Go</Button>
                 </div>
                 <div>
-                  結果：{this.props.lottery.nomal_result}回で大当たり
+                  通常抽選結果：{this.props.lottery.nomal_result}回で大当たり
+                </div>
+                <div>
+                  ST抽選結果：{this.props.lottery.st_result}連
                 </div>
             </React.Fragment>
         )
@@ -49,6 +58,6 @@ const mapStateToProps = state => ({
   lottery: state.lottery
 })
 
-const mapDispatchToProps = ({nomalLottery})
+const mapDispatchToProps = ({nomalLottery, stLottery})
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartGame)

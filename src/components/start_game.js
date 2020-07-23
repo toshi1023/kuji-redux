@@ -3,7 +3,9 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { nomalLottery } from '../actions';
 import { stLottery } from '../actions';
+import { error } from '../actions';
 import { Link } from 'react-router-dom'
+import '../css/kuji.css';
 
 class StartGame extends Component {
 
@@ -17,6 +19,7 @@ class StartGame extends Component {
   start() {
     // nomalの値が無ければホームへリダイレクト
     if (!this.props.lottery.nomal) {
+      this.props.error()
       this.props.history.push('/')
     }
     if (this.props.lottery.nomal) {
@@ -27,6 +30,7 @@ class StartGame extends Component {
   stStart() {
     // stの値が無ければホームへリダイレクト
     if (!this.props.lottery.st) {
+      this.props.error()
       this.props.history.push('/')
     }
     if (this.props.lottery.st) {
@@ -38,6 +42,7 @@ class StartGame extends Component {
       const { submitting } = this.props
         return (
             <React.Fragment>
+              <div className="body">
                 <div>
                   通常確率：{this.props.lottery.nomal}
                 </div>
@@ -60,6 +65,7 @@ class StartGame extends Component {
                 <div>
                   ST抽選結果：{this.props.lottery.st_result}連
                 </div>
+              </div>
             </React.Fragment>
         )
     }
@@ -70,6 +76,6 @@ const mapStateToProps = state => ({
   lottery: state.lottery
 })
 
-const mapDispatchToProps = ({nomalLottery, stLottery})
+const mapDispatchToProps = ({error, nomalLottery, stLottery})
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartGame)

@@ -13,8 +13,8 @@ export const error = () => dispatch => {
 
 // values: 入力フォーム(Field)の値
 export const confirmLottery = (values) => dispatch => {
-  const response = values
-  dispatch({type: CONFIRM_LOTTERY, response})
+    const response = values
+    dispatch({type: CONFIRM_LOTTERY, response})
 }
 
 // values: 入力フォーム(Field)の値

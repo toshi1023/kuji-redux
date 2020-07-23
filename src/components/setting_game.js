@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router';
 import _ from 'lodash'
-// import { Link } from 'react-router-dom'
 import '../css/kuji.css';
 import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField'
@@ -15,8 +14,14 @@ class SettingGame extends Component {
 
     constructor(props) {
       super(props)
-      
+      console.log(this.props.lottery.error)
       this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    errorMessage() {
+      if (this.props.lottery.error) {
+        return <p className="errorMessage">{this.props.lottery.error}</p>
+      }
     }
 
     renderField(field) {
@@ -35,8 +40,8 @@ class SettingGame extends Component {
     }
 
     onSubmit(values) {
-      this.props.confirmLottery(values)
-      this.props.history.push('/start')
+        this.props.confirmLottery(values)
+        this.props.history.push('/start')
     }
 
     render() {
@@ -51,6 +56,9 @@ class SettingGame extends Component {
               <div className="body">
                 <h1>抽選ゲーム</h1>
           
+                <div>
+                  {this.errorMessage()}
+                </div>
                 <div>
                   <Field label="Nomal" type="text" name="nomal" placeholder="通常確率" component={this.renderField} />
                 </div>
@@ -76,11 +84,12 @@ class SettingGame extends Component {
 // validateメソッドの中でルールやメッセージを規定してリターン
 const validate = values => {
   const errors = {}
-
-  if (!values.nomal) errors.nomal = "Enter a nomal, please."
-  if (!values.high) errors.high = "Enter a high, please."
-  if (!values.st) errors.st = "Enter a st, please."
-  if (!values.rush) errors.rush = "Enter a rush, please."
+  
+  // 数値入力以外を許さない(空の値もエラー対象に含む)
+  if (isNaN(parseInt(values.nomal))) errors.nomal = "Enter a number, please."
+  if (isNaN(parseInt(values.high))) errors.high = "Enter a number, please."
+  if (isNaN(parseInt(values.st))) errors.st = "Enter a number, please."
+  if (isNaN(parseInt(values.rush))) errors.rush = "Enter a number, please."
 
   return errors
 }

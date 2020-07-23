@@ -1,10 +1,13 @@
-/* kuji-appのメインCSS */
+/* kuji-reduxのメインCSS */
 
+/* メインbody */
 div.body {
     padding-left: 15px;
 }
 
-input.setting {
-    margin-top: 5px;
-    margin-bottom: 5px;
+/* エラーメッセージ */
+p.errorMessage {
+    color: red;
+    background-color: lightpink;
+    width: 25%;
 }

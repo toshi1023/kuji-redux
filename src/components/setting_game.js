@@ -1,14 +1,10 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router';
 import _ from 'lodash'
-import '../css/kuji.css';
+import '../sass/kuji.scss';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-// import Slide from '@material-ui/core/Slide';
-import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from 'material-ui/TextField';
 import { confirmLottery } from '../actions';
 import { error } from '../actions';

@@ -6,11 +6,11 @@ import reducer from './reducers'
 import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import './css/kuji.css';
+import './sass/kuji.scss';
 import * as serviceWorker from './serviceWorker';
 import SettingGame from './components/setting_game';
 import StartGame from './components/start_game';
-import ErrorMessage from './components/errorMessage';
+import Display from './components/display'
 
 const enhancer = applyMiddleware(thunk)
 const store = createStore(reducer, enhancer)
@@ -21,9 +21,10 @@ ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={SettingGame} />
-            <Route path="/start" component={StartGame} />
-            <Route path="/error" component={ErrorMessage} />
+            <Display>
+              <Route exact path="/" component={SettingGame} />
+              <Route path="/start" component={StartGame} />
+            </Display>
           </Switch>
         </BrowserRouter>
       </Provider>

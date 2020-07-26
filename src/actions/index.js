@@ -3,6 +3,7 @@
 export const ERROR = 'ERROR'
 export const CONFIRM_LOTTERY = 'CONFIRM_LOTTERY'
 export const NOMAL_LOTTERY = 'NOMAL_LOTTERY'
+export const JUDGEMENT = 'JUDGEMENT'
 export const ST_LOTTERY = 'ST_LOTTERY'
 
 
@@ -43,6 +44,20 @@ export const nomalLottery = (values) => dispatch => {
 
     const response = nomal_lottery(values)
     dispatch({type: NOMAL_LOTTERY, response})
+}
+
+export const judgement = (values) => dispatch => {
+  var rate = parseInt(values.rush)
+  var random = Math.floor( Math.random() * parseInt(100))
+  var response
+  
+  if ( random <= rate ) {
+    response = "Congulaturation!!!"
+  } else {
+    response = "Your Failure..."
+  }
+
+  dispatch({type: JUDGEMENT, response})
 }
 
 // values: 入力フォーム(Field)の値

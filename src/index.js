@@ -10,6 +10,7 @@ import './css/kuji.css';
 import * as serviceWorker from './serviceWorker';
 import SettingGame from './components/setting_game';
 import StartGame from './components/start_game';
+import ErrorMessage from './components/errorMessage';
 
 const enhancer = applyMiddleware(thunk)
 const store = createStore(reducer, enhancer)
@@ -22,6 +23,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={SettingGame} />
             <Route path="/start" component={StartGame} />
+            <Route path="/error" component={ErrorMessage} />
           </Switch>
         </BrowserRouter>
       </Provider>

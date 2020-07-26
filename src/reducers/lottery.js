@@ -1,4 +1,4 @@
-import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR } from '../actions'
+import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR, JUDGEMENT } from '../actions'
 
 export default (states = {}, action) => {
     // actionのタイプに応じて処理を分ける
@@ -16,6 +16,8 @@ export default (states = {}, action) => {
             }
         case NOMAL_LOTTERY:
             return {...states, nomal_result: action.response}
+        case JUDGEMENT:
+            return {...states, judgement: action.response}
         case ST_LOTTERY:
             return {...states, st_result: action.response}
         default:

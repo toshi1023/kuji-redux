@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router';
 import _ from 'lodash'
 import '../css/kuji.css';
 import Button from '@material-ui/core/Button';
-import TextField from 'material-ui/TextField'
+import Snackbar from '@material-ui/core/Snackbar';
+// import Slide from '@material-ui/core/Slide';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from 'material-ui/TextField';
 import { confirmLottery } from '../actions';
 import { error } from '../actions';
-
+import  ErrorMessage from './errorMessage';
 
 class SettingGame extends Component {
 
@@ -16,12 +20,6 @@ class SettingGame extends Component {
       super(props)
       console.log(this.props.lottery.error)
       this.onSubmit = this.onSubmit.bind(this)
-    }
-
-    errorMessage() {
-      if (this.props.lottery.error) {
-        return <p className="errorMessage">{this.props.lottery.error}</p>
-      }
     }
 
     renderField(field) {
@@ -48,17 +46,14 @@ class SettingGame extends Component {
       
       // ボタンのON,OFFカスタマイズ
       const { handleSubmit, pristine, submitting, invalid } = this.props
-      
+
       // handleSubmit: submitボタンが押下されたら引数に設定した処理を実行する関数
       return (
           <React.Fragment>
             <form onSubmit={handleSubmit(this.onSubmit)}>
               <div className="body">
                 <h1>抽選ゲーム</h1>
-          
-                <div>
-                  {this.errorMessage()}
-                </div>
+                <ErrorMessage message={this.props.lottery.error} />
                 <div>
                   <Field label="Nomal" type="text" name="nomal" placeholder="通常確率" component={this.renderField} />
                 </div>
@@ -72,7 +67,7 @@ class SettingGame extends Component {
                   <Field label="Rush" type="text" name="rush" placeholder="突入確率" component={this.renderField} />
                 </div>
                 <div>
-                  <Button variant="outlined" color="primary" size="small" type="submit" disabled={pristine || submitting || invalid} >Confirm</Button>
+                  <Button variant="contained" color="primary" size="small" type="submit" disabled={pristine || submitting || invalid} >Confirm</Button>
                 </div>
               </div>      
             </form>

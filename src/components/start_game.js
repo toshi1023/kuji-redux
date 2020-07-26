@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { nomalLottery } from '../actions';
+import { judgement } from '../actions';
 import { stLottery } from '../actions';
 import { error } from '../actions';
 import { Link } from 'react-router-dom'
@@ -13,6 +14,7 @@ class StartGame extends Component {
     super(props)
     // start()メソッドとstStart()メソッドをこのコンポーネントに紐づけ
     this.start = this.start.bind(this)
+    this.judgement = this.judgement.bind(this)
     this.stStart = this.stStart.bind(this)
   }
 
@@ -24,6 +26,17 @@ class StartGame extends Component {
     }
     if (this.props.lottery.nomal) {
       this.props.nomalLottery(this.props.lottery.nomal)
+    }
+  }
+
+  judgement() {
+    // rushの値が無ければホームへリダイレクト
+    if (!this.props.lottery.rush) {
+      this.props.error()
+      this.props.history.push('/')
+    }
+    if (this.props.lottery.rush) {
+      this.props.judgement(this.props.lottery)
     }
   }
 
@@ -56,11 +69,17 @@ class StartGame extends Component {
                   突入確率：{this.props.lottery.rush}
                 </div>
                 <div>
-                <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.start} disabled={ submitting } >Go</Button>
-                <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.stStart} disabled={ submitting } >ST Go</Button>
+                  <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.start} disabled={ submitting } >Go</Button>
+                  <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.judgement} disabled={ submitting } >Judgement</Button>
+                </div>
+                <div>
+                  <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.stStart} disabled={ submitting } >ST Go</Button>
                 </div>
                 <div>
                   通常抽選結果：{this.props.lottery.nomal_result}回で大当たり
+                </div>
+                <div>
+                  Rush抽選結果：{this.props.lottery.judgement}
                 </div>
                 <div>
                   ST抽選結果：{this.props.lottery.st_result}連
@@ -76,6 +95,6 @@ const mapStateToProps = state => ({
   lottery: state.lottery
 })
 
-const mapDispatchToProps = ({error, nomalLottery, stLottery})
+const mapDispatchToProps = ({error, nomalLottery, stLottery, judgement})
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartGame)

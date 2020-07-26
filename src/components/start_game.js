@@ -7,6 +7,7 @@ import { judgement } from '../actions';
 import { stLottery } from '../actions';
 import { error } from '../actions';
 import '../sass/kuji.scss';
+import ButtonAppBar from './navbar';
 
 class StartGame extends Component {
 
@@ -55,8 +56,8 @@ class StartGame extends Component {
       const { submitting } = this.props
         return (
             <React.Fragment>
+              <ButtonAppBar />
               <div className="body">
-                <Button variant="outlined" color="primary" size="small" href="/" disabled={ submitting } >戻る</Button>
                 <div>
                   通常確率：{this.props.lottery.nomal}
                 </div>
@@ -86,6 +87,10 @@ class StartGame extends Component {
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.judgement} disabled={ submitting } >Judgement</Button>
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.stStart} disabled={ submitting } >ST Go</Button>
                 </div>
+                <hr />
+                <h2>
+                  Game Log
+                </h2>
               </div>
             </React.Fragment>
         )

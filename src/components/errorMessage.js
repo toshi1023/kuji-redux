@@ -35,7 +35,8 @@ export default function ErrorMessage(props) {
     return (
       <div className={classes.root}>
         <Button variant="outlined" color="secondary" onClick={handleClick}>
-            エラーがあります！
+            エラーがあります！<br />
+            (Click Here!)
         </Button>
         <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error">

@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import ErrorMessage from './errorMessage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const back = () => {
+const back = (props) => {
     // 現在のURLが条件
     if (window.location.pathname === '/start' ){
         return (
@@ -22,12 +23,17 @@ const back = () => {
                 戻る
             </Button>
         )
-
-        return null
     }
+
+    return (
+          // 右寄せにするためにButtonタグでラッピング
+          <Button>
+            <ErrorMessage message={props}/>
+          </Button>
+        )
 }
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -35,9 +41,9 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Kuji Game
+            Kuji App
           </Typography>
-          {back()}
+          {back(props.message)}
         </Toolbar>
       </AppBar>
     </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import SettingGame from './setting_game';
 import StartGame from './start_game';
 import '../sass/kuji.scss';

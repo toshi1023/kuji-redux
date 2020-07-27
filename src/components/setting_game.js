@@ -47,12 +47,9 @@ class SettingGame extends Component {
       // handleSubmit: submitボタンが押下されたら引数に設定した処理を実行する関数
       return (
           <React.Fragment>
-            <ButtonAppBar />
+            <ButtonAppBar message={this.props.lottery.error}/>
             <form onSubmit={handleSubmit(this.onSubmit)}>
               <div className="body">
-                {/* <h1 className="mainTitle">Kuji Game</h1> */}
-                
-                <ErrorMessage message={this.props.lottery.error} />
                 <div>
                   <Field label="Nomal" type="text" name="nomal" placeholder="通常確率" component={this.renderField} />
                 </div>

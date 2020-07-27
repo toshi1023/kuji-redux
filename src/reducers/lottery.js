@@ -1,4 +1,4 @@
-import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR, JUDGEMENT } from '../actions'
+import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR, JUDGEMENT, judgement } from '../actions'
 
 export default (states = {}, action) => {
     // actionのタイプに応じて処理を分ける
@@ -15,11 +15,20 @@ export default (states = {}, action) => {
                 rush: action.response.rush,
             }
         case NOMAL_LOTTERY:
-            return {...states, nomal_result: action.response}
+            return {...states, 
+                nomal_result: '通常抽選結果：' + action.response + '回で大当たり',
+                resultFlg: 'nomal'
+            }
         case JUDGEMENT:
-            return {...states, judgement: action.response}
+            return {...states, 
+                judgement: 'Rush抽選結果：' + action.response,
+                resultFlg: 'judge'
+            }
         case ST_LOTTERY:
-            return {...states, st_result: action.response}
+            return {...states, 
+                st_result: 'ST抽選結果：' + action.response + '連',
+                resultFlg: 'st'
+            }
         default:
             return states
     }

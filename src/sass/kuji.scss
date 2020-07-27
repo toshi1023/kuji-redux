@@ -4,6 +4,7 @@
 div.body {
     padding-top: 10px;
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* エラーメッセージ */
@@ -11,6 +12,16 @@ p.errorMessage {
     color: red;
     background-color: lightpink;
     width: 25%;
+}
+
+/* サブディスプレイデザイン */
+div.content-box {
+    width: 100%;
+    height: 120px;
+}
+div.content-box p {
+  line-height: 120px;
+  text-align: center;
 }
 
 /* display.jsの表示デザイン */

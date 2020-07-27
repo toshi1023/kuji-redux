@@ -8,6 +8,7 @@ import { stLottery } from '../actions';
 import { error } from '../actions';
 import '../sass/kuji.scss';
 import ButtonAppBar from './navbar';
+import SubDisplay from './subDisplay';
 
 class StartGame extends Component {
 
@@ -17,6 +18,7 @@ class StartGame extends Component {
     this.start = this.start.bind(this)
     this.judgement = this.judgement.bind(this)
     this.stStart = this.stStart.bind(this)
+    this.result = this.result.bind(this)
   }
 
   start() {
@@ -52,6 +54,18 @@ class StartGame extends Component {
     }
   }
 
+  result() {
+    if (this.props.lottery.resultFlg === "nomal") {
+      return <SubDisplay result={this.props.lottery.nomal_result} />
+    }
+    if(this.props.lottery.resultFlg === "judge") {
+      return <SubDisplay result={this.props.lottery.judgement} />
+    }
+    if(this.props.lottery.resultFlg === "st") {
+      return <SubDisplay result={this.props.lottery.st_result} />
+    }
+  }
+
     render() {
       const { submitting } = this.props
         return (
@@ -71,17 +85,7 @@ class StartGame extends Component {
                   突入確率：{this.props.lottery.rush}
                 </div>
                 <hr />
-                <div>
-                  <div>
-                      通常抽選結果：{this.props.lottery.nomal_result}回で大当たり
-                  </div>
-                  <div>
-                      Rush抽選結果：{this.props.lottery.judgement}
-                  </div>
-                  <div>
-                      ST抽選結果：{this.props.lottery.st_result}連
-                  </div>   
-                </div>
+                {this.result()}
                 <div>
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.start} disabled={ submitting } >Go</Button>
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.judgement} disabled={ submitting } >Judgement</Button>

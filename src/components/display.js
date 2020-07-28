@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import SettingGame from './setting_game';
 import StartGame from './start_game';
+import _ from 'lodash'
+import Grid from '@material-ui/core/Grid';
 import '../sass/kuji.scss';
 
 class Display extends Component {
+
+    constructor(props) {
+        super(props)
+        this.renderJackpots = this.renderJackpots.bind(this)
+      }
 
     // ページの分岐を設定
     currentPage() {
@@ -13,6 +21,15 @@ class Display extends Component {
         }
         
         return <SettingGame />
+    }
+
+    renderJackpots() {
+        // _: lodash → mapでデータを繰り返し実装するため
+        return _.map(this.props.lottery.jackpot, jackpot => (
+            <li key={jackpot}>
+                {jackpot}
+            </li>
+        ))
     }
 
     render() {
@@ -41,9 +58,22 @@ class Display extends Component {
                     </div>
                     </div>
                 </div> 
+                <div className="body">
+                    <hr />
+                </div>
+                <Grid item xs={12}>
+                    <div className="gameLog">
+                        <h2>Game Log</h2>
+                        {this.renderJackpots()}
+                    </div>
+                </Grid>
             </React.Fragment>
         )
     }
 }
 
-export default Display
+const mapStateToProps = state => ({
+    lottery: state.lottery
+})
+
+export default connect(mapStateToProps, null)(Display)

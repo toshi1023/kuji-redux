@@ -7,15 +7,12 @@ import '../sass/kuji.scss';
 import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField';
 import { confirmLottery } from '../actions';
-import { error } from '../actions';
-import ErrorMessage from './errorMessage';
 import ButtonAppBar from './navbar';
 
 class SettingGame extends Component {
 
     constructor(props) {
       super(props)
-      console.log(this.props.lottery.error)
       this.onSubmit = this.onSubmit.bind(this)
     }
 
@@ -88,7 +85,7 @@ const validate = values => {
 const mapStateToProps = state => ({
   lottery: state.lottery
 })
-const mapDispatchToProps = ({error, confirmLottery})
+const mapDispatchToProps = ({confirmLottery})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({ validate, form: 'settingGameForm' })(SettingGame)

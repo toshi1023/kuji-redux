@@ -92,16 +92,12 @@ class StartGame extends Component {
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.stStart} disabled={ submitting } >ST Go</Button>
                 </div>
                 <hr />
-                <h2>
-                  Game Log
-                </h2>
               </div>
             </React.Fragment>
         )
     }
 }
 
-// setting_gameからの入力値とnomalLotteryからの戻り値である当選時の抽選回数を受け取り
 const mapStateToProps = state => ({
   lottery: state.lottery
 })

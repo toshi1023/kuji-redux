@@ -65,8 +65,8 @@ export const stLottery = (values) => dispatch => {
 
     var times
     var loop = 1
-    // stの結果を代入する配列を宣言
-    var st_result = []
+    var i
+    var jackpot = []
     var game_over
     
     /* stの抽選を実施 */
@@ -83,14 +83,16 @@ export const stLottery = (values) => dispatch => {
             console.log( times + "回転で" + loop + "連目の大当たりをGET" )
             break
           }
-  
           times++
         }
 
         if (times > values.st) {
           game_over = '終了！'
           console.log(game_over)
+          return;
         }
+
+        return jackpot.push(times + "回転で" + loop + "連目の大当たりをGET")
     }
 
     // game_overに値が入らない限りst_loopの処理を繰り返す
@@ -103,11 +105,9 @@ export const stLottery = (values) => dispatch => {
           break
         }  
       }
-
-      return loop;
-      
+      return loop;    
     }
 
-    const response = st_lottery(values)
+    const response = {result: st_lottery(values), jackpot: jackpot}
     dispatch({type: ST_LOTTERY, response})
 }

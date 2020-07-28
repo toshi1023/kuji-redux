@@ -21,12 +21,13 @@ export default (states = {}, action) => {
             }
         case JUDGEMENT:
             return {...states, 
-                judgement: 'Rush抽選結果：' + action.response,
+                judgement: action.response,
                 resultFlg: 'judge'
             }
         case ST_LOTTERY:
             return {...states, 
-                st_result: 'ST抽選結果：' + action.response + '連',
+                st_result: 'ST抽選結果：' + action.response.result + '連',
+                jackpot: action.response.jackpot,
                 resultFlg: 'st'
             }
         default:

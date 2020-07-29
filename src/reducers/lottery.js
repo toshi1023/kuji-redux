@@ -1,4 +1,5 @@
-import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR, JUDGEMENT, judgement } from '../actions'
+import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR, JUDGEMENT } from '../actions'
+import _ from 'lodash'
 
 export default (states = {}, action) => {
     // actionのタイプに応じて処理を分ける
@@ -16,13 +17,20 @@ export default (states = {}, action) => {
             }
         case NOMAL_LOTTERY:
             return {...states, 
-                nomal_result: '通常抽選結果：' + action.response + '回で大当たり',
+                nomal_result: '通常抽選結果：' + action.response.result + '回で大当たり',
+                lottery: action.response.lottery,
                 resultFlg: 'nomal'
             }
         case JUDGEMENT:
-            return {...states, 
-                judgement: action.response,
-                resultFlg: 'judge'
+            return {...states,
+                start: action.response.start,
+                first: action.response.first,
+                second: action.response.second,
+                third: action.response.third,
+                forth: action.response.forth,
+                route: action.response.route,
+                judge_result: action.response.result,
+                resultFlg: 'judgement'
             }
         case ST_LOTTERY:
             return {...states, 

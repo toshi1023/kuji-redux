@@ -23,7 +23,7 @@ ReactDOM.render(
           <Switch>
             <Display>
               <Route exact path="/" component={SettingGame} />
-              <Route path="/start" component={StartGame} />
+              <Route exact path="/start" component={StartGame} />
             </Display>
           </Switch>
         </BrowserRouter>

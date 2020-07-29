@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import SettingGame from './setting_game';
 import StartGame from './start_game';
-import _ from 'lodash'
+import _ from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import '../sass/kuji.scss';
 
@@ -19,17 +19,40 @@ class Display extends Component {
         if (window.location.pathname === '/start' ){
             return <StartGame />
         }
-        
         return <SettingGame />
     }
 
     renderJackpots() {
         // _: lodash → mapでデータを繰り返し実装するため
-        return _.map(this.props.lottery.jackpot, jackpot => (
-            <li key={jackpot}>
-                {jackpot}
-            </li>
-        ))
+        if (this.props.lottery.resultFlg === 'nomal') {
+            return _.map(this.props.lottery.lottery, lottery => (
+                <li>
+                    {lottery}
+                </li>
+            ))
+        }
+
+        if (this.props.lottery.resultFlg === 'st') {
+            return _.map(this.props.lottery.jackpot, jackpot => (
+                <li key={jackpot}>
+                    {jackpot}
+                </li>
+            ))
+        }
+        
+        if (this.props.lottery.resultFlg === 'judgement') {
+            return (
+                <>
+                    <li>{this.props.lottery.start}</li>
+                    <li>{this.props.lottery.first}</li>
+                    <li>{this.props.lottery.second}</li>
+                    <li>{this.props.lottery.route}</li>
+                    <li>{this.props.lottery.third}</li>
+                    <li>{this.props.lottery.forth}</li>
+                    <li>{this.props.lottery.judge_result}</li>
+                </>
+            )
+        }
     }
 
     render() {

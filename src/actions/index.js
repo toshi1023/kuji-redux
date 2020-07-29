@@ -21,6 +21,8 @@ export const confirmLottery = (values) => dispatch => {
 // values: 入力フォーム(Field)の値
 export const nomalLottery = (values) => dispatch => {
 
+  var lottery = []
+
     /* 通常確率の抽選を実施 */
     function nomal_lottery(values) {
 
@@ -30,33 +32,62 @@ export const nomalLottery = (values) => dispatch => {
           // 入力した通常確率の範囲内で乱数を生成
           var nomal_result = Math.floor( Math.random() * parseInt(values))
           console.log(nomal_result)
-  
+          lottery.push(nomal_result)
+          
           if (nomal_result === 1) {
             console.log( times + "回転で大当たりをGET")
             break
           }
-  
           times++
         }
-
         return times;
     }
 
-    const response = nomal_lottery(values)
+    const response = {result: nomal_lottery(values), lottery: lottery}
     dispatch({type: NOMAL_LOTTERY, response})
 }
 
 export const judgement = (values) => dispatch => {
   var rate = parseInt(values.rush)
   var random = Math.floor( Math.random() * parseInt(100))
-  var response
-  
-  if ( random <= rate ) {
-    response = "Congulaturation!!!"
-  } else {
-    response = "Your Failure..."
-  }
+  var response = {}
 
+  response = {
+    start: "Judgment",
+    first: "己の手でRushをつかみ取れ!",
+    second: "期待度は...",
+    third: "いざ決着!",
+    forth: "気合を入れてボタンを押せ!!!"
+  }
+  console.log(random)
+  if ( random <= rate ) {
+    var route = Math.floor( Math.random() * parseInt(100))
+    console.log(route)
+    if (route <= 7) {
+      response.route = "超激熱!!!"
+    } else if(8 < route <= 35) {
+      response.route = "激熱!!"
+    } else if(36 < route <= 70) {
+      response.route = "チャンス!"
+    } else if(71 < route <= 85) {
+      response.route = "チャンス...?"
+    } else if(86 < route <= 100) {
+      response.route = "期待できる...?"
+    }
+    response.result = "Congulaturation!!!"
+  } else {
+    var route = Math.floor( Math.random() * parseInt(100))
+    if(route <= 15) {
+      response.route = "激熱!!"
+    } else if(16 < route <= 50) {
+      response.route = "チャンス!"
+    } else if(51 < route <= 75) {
+      response.route = "チャンス...?"
+    } else if(76 < route <= 100) {
+      response.route = "期待できる...?"
+    }
+    response.result = "Your Failure..."
+  }
   dispatch({type: JUDGEMENT, response})
 }
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { nomalLottery } from '../actions';
-import { judgement } from '../actions';
 import { stLottery } from '../actions';
+import { judgement } from '../actions';
 import { error } from '../actions';
 import '../sass/kuji.scss';
 import ButtonAppBar from './navbar';
@@ -16,9 +16,9 @@ class StartGame extends Component {
     super(props)
     // start()メソッドとjudgement()メソッド、stStart()メソッドをこのコンポーネントに紐づけ
     this.start = this.start.bind(this)
-    this.judgement = this.judgement.bind(this)
     this.stStart = this.stStart.bind(this)
     this.result = this.result.bind(this)
+    this.judgement = this.judgement.bind(this)
   }
 
   start() {
@@ -58,15 +58,12 @@ class StartGame extends Component {
     if (this.props.lottery.resultFlg === "nomal") {
       return <SubDisplay result={this.props.lottery.nomal_result} />
     }
-    if(this.props.lottery.resultFlg === "judge") {
-      return <SubDisplay result={this.props.lottery.judgement} />
-    }
     if(this.props.lottery.resultFlg === "st") {
       return <SubDisplay result={this.props.lottery.st_result} />
     }
   }
-
     render() {
+      console.log(this.props.lottery)
       const { submitting } = this.props
         return (
             <React.Fragment>

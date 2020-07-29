@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 const back = (props) => {
     // 現在のURLが条件
-    if (window.location.pathname === '/start' ){
+    if (window.location.pathname === '/start' || window.location.pathname === '/judgement' ){
         return (
             <Button variant="outlined" color="inherit" href="/">
                 戻る

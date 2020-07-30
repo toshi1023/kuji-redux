@@ -10,6 +10,7 @@ import './sass/kuji.scss';
 import * as serviceWorker from './serviceWorker';
 import SettingGame from './components/setting_game';
 import StartGame from './components/start_game';
+import Judgement from './components/judgement';
 import Display from './components/display'
 
 const enhancer = applyMiddleware(thunk)
@@ -24,6 +25,7 @@ ReactDOM.render(
             <Display>
               <Route exact path="/" component={SettingGame} />
               <Route exact path="/start" component={StartGame} />
+              <Route exact path="/judgement" component={Judgement} />
             </Display>
           </Switch>
         </BrowserRouter>

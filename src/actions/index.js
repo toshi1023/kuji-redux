@@ -52,42 +52,103 @@ export const judgement = (values) => dispatch => {
   var random = Math.floor( Math.random() * parseInt(100))
   var response = {}
 
-  response = {
-    start: "Judgment",
-    first: "己の手でRushをつかみ取れ!",
-    second: "期待度は...",
-    third: "いざ決着!",
-    forth: "気合を入れてボタンを押せ!!!"
-  }
-  console.log(random)
-  if ( random <= rate ) {
-    var route = Math.floor( Math.random() * parseInt(100))
-    console.log(route)
-    if (route <= 7) {
-      response.route = "超激熱!!!"
-    } else if(8 < route <= 35) {
-      response.route = "激熱!!"
-    } else if(36 < route <= 70) {
-      response.route = "チャンス!"
-    } else if(71 < route <= 85) {
-      response.route = "チャンス...?"
-    } else if(86 < route <= 100) {
-      response.route = "期待できる...?"
+  console.log(values)
+  function message() {
+    if (values.pageFlg === undefined) {
+      var response = {}
+      response = {
+        flg: 1,
+      }
+    
+      console.log(random)
+      if ( random <= rate ) {
+        var route = Math.floor( Math.random() * parseInt(100))
+        console.log(route)
+        if (route <= 7) {
+          response.route = "超激熱!!!"
+        } else if(8 < route && route <= 35) {
+          response.route = "激熱!!"
+        } else if(36 < route && route <= 70) {
+          response.route = "チャンス!"
+        } else if(71 < route && route <= 85) {
+          response.route = "チャンス...?"
+        } else if(86 < route && route <= 100) {
+          response.route = "期待できる...?"
+        }
+        response.result = "Congulaturation!!!"
+      } else {
+        var route = Math.floor( Math.random() * parseInt(100))
+        if(route <= 15) {
+          response.route = "激熱!!"
+        } else if(16 < route && route <= 50) {
+          response.route = "チャンス!"
+        } else if(51 < route && route <= 75) {
+          response.route = "チャンス...?"
+        } else if(76 < route && route <= 100) {
+          response.route = "期待できる...?"
+        }
+        response.result = "Your Failure..."
+      }
+      return response;
     }
-    response.result = "Congulaturation!!!"
-  } else {
-    var route = Math.floor( Math.random() * parseInt(100))
-    if(route <= 15) {
-      response.route = "激熱!!"
-    } else if(16 < route <= 50) {
-      response.route = "チャンス!"
-    } else if(51 < route <= 75) {
-      response.route = "チャンス...?"
-    } else if(76 < route <= 100) {
-      response.route = "期待できる...?"
+    if (values.pageFlg === 1) {
+      response = {
+        flg: 2,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
     }
-    response.result = "Your Failure..."
+    if (values.pageFlg === 2) {
+      response = {
+        flg: 3,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
+    if (values.pageFlg === 3) {
+      response = {
+        flg: 4,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
+    if (values.pageFlg === 4) {
+      response = {
+        flg: 5,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
+    if (values.pageFlg === 5) {
+      response = {
+        flg: 6,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
+    if (values.pageFlg === 6) {
+      response = {
+        flg: 7,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
+    if (values.resultFlg === 7) {
+      response = {
+        flg: undefined,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
   }
+  response = message()
   dispatch({type: JUDGEMENT, response})
 }
 

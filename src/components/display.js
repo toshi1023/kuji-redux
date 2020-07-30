@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import SettingGame from './setting_game';
 import StartGame from './start_game';
+import Judgement from './judgement';
 import _ from 'lodash';
 import Grid from '@material-ui/core/Grid';
 import '../sass/kuji.scss';
@@ -18,6 +19,9 @@ class Display extends Component {
         // 現在のURLが条件
         if (window.location.pathname === '/start' ){
             return <StartGame />
+        }
+        if (window.location.pathname === '/judgement' ){
+            return <Judgement />
         }
         return <SettingGame />
     }

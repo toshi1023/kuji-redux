@@ -23,13 +23,14 @@ export default (states = {}, action) => {
             }
         case JUDGEMENT:
             return {...states,
-                start: action.response.start,
-                first: action.response.first,
-                second: action.response.second,
-                third: action.response.third,
-                forth: action.response.forth,
+                start: "Judgment",
+                first: "己の手でRushをつかみ取れ!",
+                second: "期待度は...",
+                third: "いざ決着!",
+                forth: "気合を入れてボタンを押せ!!!",
                 route: action.response.route,
                 judge_result: action.response.result,
+                pageFlg: action.response.flg,
                 resultFlg: 'judgement'
             }
         case ST_LOTTERY:

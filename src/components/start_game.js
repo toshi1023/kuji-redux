@@ -39,7 +39,7 @@ class StartGame extends Component {
       this.props.history.push('/')
     }
     if (this.props.lottery.rush) {
-      this.props.judgement(this.props.lottery)
+      this.props.history.push('/judgement')
     }
   }
 

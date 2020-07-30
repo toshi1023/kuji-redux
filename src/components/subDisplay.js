@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import _ from 'lodash';
 import '../sass/kuji.scss';
 
 export default function SubDisplay(props) {
 
-    const updateProps = () => {
-        if(props.result) {
-            return props.result   
-        }
+    if(props) {
+        return (
+            <div className="content-box">
+                <p>{props.result}</p>
+            </div>
+        ) 
     }
-    
-    return (
-        <div className="content-box">
-            <p>{updateProps()}</p>
-        </div>
-    )
-    
 }

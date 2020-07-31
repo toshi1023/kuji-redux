@@ -22,6 +22,7 @@ export default (states = {}, action) => {
                 resultFlg: 'nomal'
             }
         case JUDGEMENT:
+            console.log(action.response)
             return {...states,
                 start: "Judgment",
                 first: "己の手でRushをつかみ取れ!",

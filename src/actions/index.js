@@ -54,10 +54,10 @@ export const judgement = (values) => dispatch => {
 
   console.log(values)
   function message() {
-    if (values.pageFlg === undefined) {
+    if (!values.pageFlg || values.pageFlg === 8) {
       var response = {}
       response = {
-        flg: 1,
+        flg: 1
       }
     
       console.log(random)
@@ -139,9 +139,9 @@ export const judgement = (values) => dispatch => {
       }
       return response
     }
-    if (values.resultFlg === 7) {
+    if (values.pageFlg === 7) {
       response = {
-        flg: undefined,
+        flg: 8,
         route: values.route,
         result: values.judge_result
       }

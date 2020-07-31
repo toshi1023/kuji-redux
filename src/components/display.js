@@ -44,7 +44,7 @@ class Display extends Component {
             ))
         }
         
-        if (this.props.lottery.resultFlg === 'judgement') {
+        if (this.props.lottery.resultFlg === 'judgement' && this.props.lottery.pageFlg === 8) {
             return (
                 <>
                     <li>{this.props.lottery.start}</li>

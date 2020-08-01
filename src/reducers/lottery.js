@@ -14,6 +14,10 @@ export default (states = {}, action) => {
                 high: action.response.high,
                 st: action.response.st,
                 rush: action.response.rush,
+                reward1: action.response.reward1,
+                reward2: action.response.reward2,
+                section1: action.response.section1,
+                section2: action.response.section2
             }
         case NOMAL_LOTTERY:
             return {...states, 
@@ -22,7 +26,6 @@ export default (states = {}, action) => {
                 resultFlg: 'nomal'
             }
         case JUDGEMENT:
-            console.log(action.response)
             return {...states,
                 start: "Judgment",
                 first: "己の手でRushをつかみ取れ!",

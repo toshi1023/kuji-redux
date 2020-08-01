@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import { nomalLottery } from '../actions';
 import { stLottery } from '../actions';
 import { judgement } from '../actions';
 import { error } from '../actions';
 import '../sass/kuji.scss';
-import ButtonAppBar from './navbar';
-import SubDisplay from './subDisplay';
+import ButtonAppBar from './design_parts/navbar';
+import SubDisplay from './design_parts/subDisplay';
 
 class StartGame extends Component {
 
@@ -69,20 +70,40 @@ class StartGame extends Component {
             <React.Fragment>
               <ButtonAppBar />
               <div className="body">
-                <div>
-                  通常確率：{this.props.lottery.nomal}
-                </div>
-                <div>
-                  高確率：{this.props.lottery.high}
-                </div>
-                <div>
-                  ST回数：{this.props.lottery.st}
-                </div>
-                <div>
-                  突入確率：{this.props.lottery.rush}
-                </div>
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <div>
+                      通常確率：{this.props.lottery.nomal}
+                    </div>
+                    <div>
+                      高確率：{this.props.lottery.high}
+                    </div>
+                    <div>
+                      ST回数：{this.props.lottery.st}
+                    </div>
+                    <div>
+                      突入確率：{this.props.lottery.rush}
+                    </div>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <div>
+                      出玉1：{this.props.lottery.reward1}発
+                    </div>
+                    <div>
+                      出玉2：{this.props.lottery.reward2}発
+                    </div>
+                    <div>
+                      振り分け1：{this.props.lottery.section1}%
+                    </div>
+                    <div>
+                      振り分け2：{this.props.lottery.section2}%
+                    </div>
+                  </Grid>
+                </Grid>
                 <hr />
-                {this.result()}
+                <div className="content-box">
+                  {this.result()}
+                </div>
                 <div>
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.start} disabled={ submitting } >Go</Button>
                   <Button variant="contained" color="primary" size="small" type="submit" onClick={this.judgement} disabled={ submitting } >Judgement</Button>

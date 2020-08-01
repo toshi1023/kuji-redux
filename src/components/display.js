@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import RewardSetting from './reward_setting';
 import SettingGame from './setting_game';
 import StartGame from './start_game';
 import Judgement from './judgement';
@@ -17,6 +18,9 @@ class Display extends Component {
     // ページの分岐を設定
     currentPage() {
         // 現在のURLが条件
+        if (window.location.pathname === '/reward' ){
+            return <RewardSetting />
+        }
         if (window.location.pathname === '/start' ){
             return <StartGame />
         }
@@ -44,7 +48,7 @@ class Display extends Component {
             ))
         }
         
-        if (this.props.lottery.resultFlg === 'judgement' && this.props.lottery.pageFlg === 8) {
+        if (this.props.lottery.resultFlg === 'judgement' && this.props.lottery.pageFlg === 9) {
             return (
                 <>
                     <li>{this.props.lottery.start}</li>

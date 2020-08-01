@@ -8,8 +8,9 @@ import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField';
 import { confirmLottery } from '../actions';
 import ButtonAppBar from './design_parts/navbar';
+import start_game from './start_game';
 
-class SettingGame extends Component {
+class RewardSetting extends Component {
 
     constructor(props) {
       super(props)
@@ -32,14 +33,20 @@ class SettingGame extends Component {
     }
 
     onSubmit(values) {
+        // start_game.jsへ値を引き継げるように設定
+        values.nomal = this.props.lottery.nomal
+        values.high = this.props.lottery.high
+        values.st = this.props.lottery.st
+        values.rush = this.props.lottery.rush
+
         this.props.confirmLottery(values)
-        this.props.history.push('/reward')
+        this.props.history.push('/start')
     }
 
     render() {
-      
+      console.log(this.props.lottery)
       // ボタンのON,OFFカスタマイズ
-      const { handleSubmit, pristine, submitting, invalid } = this.props
+      const { handleSubmit, submitting } = this.props
 
       // handleSubmit: submitボタンが押下されたら引数に設定した処理を実行する関数
       return (
@@ -48,21 +55,21 @@ class SettingGame extends Component {
             <form onSubmit={handleSubmit(this.onSubmit)}>
               <div className="body">
                 <div>
-                  <Field label="Nomal(通常確率)" type="text" name="nomal" placeholder="通常確率" component={this.renderField} />
+                  <Field label="Reward1(出玉数)" type="text" name="reward1" placeholder="出玉数1" component={this.renderField} />
                 </div>
                 <div>
-                  <Field label="High(高確率)" type="text" name="high" placeholder="高確率" component={this.renderField} />
+                  <Field label="Reward2(出玉数)" type="text" name="reward2" placeholder="出玉数2" component={this.renderField} />
                 </div>
                 <div>
-                  <Field label="St(ST回転数)" type="text" name="st" placeholder="ST回数" component={this.renderField} />
+                  <Field label="Section1(出玉振り分け%)" type="text" name="section1" placeholder="出玉振り分け1" component={this.renderField} />
                 </div>
                 <div>
-                  <Field label="Rush(確変突入率)" type="text" name="rush" placeholder="突入確率" component={this.renderField} />
+                  <Field label="Section2(出玉振り分け%)" type="text" name="section2" placeholder="出玉振り分け2" component={this.renderField} />
                 </div>
                 <div>
-                  <Button variant="contained" color="primary" size="small" type="submit" disabled={pristine || submitting || invalid} >Next</Button>
+                  <Button variant="contained" color="primary" size="small" type="submit" disabled={submitting} >Confirm</Button>
                 </div>
-              </div>      
+              </div>
             </form>
           </React.Fragment>
       )
@@ -73,11 +80,11 @@ class SettingGame extends Component {
 const validate = values => {
   const errors = {}
   
-  // 数値入力以外を許さない(空の値もエラー対象に含む)
-  if (isNaN(parseInt(values.nomal))) errors.nomal = "Enter a number, please."
-  if (isNaN(parseInt(values.high))) errors.high = "Enter a number, please."
-  if (isNaN(parseInt(values.st))) errors.st = "Enter a number, please."
-  if (isNaN(parseInt(values.rush))) errors.rush = "Enter a number, please."
+  // 数値入力以外を許さない
+  if (isNaN(parseInt(values.reward1))) errors.rush = "Enter a number, please."
+  if (isNaN(parseInt(values.reward2))) errors.rush = "Enter a number, please."
+  if (isNaN(parseInt(values.section1))) errors.rush = "Enter a number, please."
+  if (isNaN(parseInt(values.section2))) errors.rush = "Enter a number, please."
 
   return errors
 }
@@ -88,5 +95,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = ({confirmLottery})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
-  reduxForm({ validate, form: 'settingGameForm' })(SettingGame)
+  reduxForm({ validate, form: 'settingGameForm' })(RewardSetting)
 ))

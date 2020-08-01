@@ -11,6 +11,10 @@ div.gameLog {
   padding-left: 50px;
 }
 
+div.p.text-line {
+  text-align: right;
+}
+
 /* エラーメッセージ */
 p.errorMessage {
     color: red;
@@ -26,6 +30,22 @@ div.content-box {
 div.content-box p {
   line-height: 300px;
   text-align: center;
+}
+
+/* 画像のアニメーションデザイン */
+// 表示開始
+.imageShow-enter-active {
+  opacity: 0;
+}
+// 表示完了
+.imageShow-enter-done {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+// 非表示完了
+.imageShow-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }
 
 /* display.jsの表示デザイン */

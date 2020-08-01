@@ -6,12 +6,13 @@ export const NOMAL_LOTTERY = 'NOMAL_LOTTERY'
 export const JUDGEMENT = 'JUDGEMENT'
 export const ST_LOTTERY = 'ST_LOTTERY'
 
-
+/* エラーメッセージをstateで管理する処理 */
 export const error = () => dispatch => {
   const response = "抽選確率を入力してください"
   dispatch({type: ERROR, response})
 }
 
+/* 入力値をstateで管理する処理 */
 // values: 入力フォーム(Field)の値
 export const confirmLottery = (values) => dispatch => {
     const response = values
@@ -47,14 +48,14 @@ export const nomalLottery = (values) => dispatch => {
     dispatch({type: NOMAL_LOTTERY, response})
 }
 
+/* Judgementの処理 */
 export const judgement = (values) => dispatch => {
   var rate = parseInt(values.rush)
   var random = Math.floor( Math.random() * parseInt(100))
   var response = {}
 
-  console.log(values)
   function message() {
-    if (!values.pageFlg || values.pageFlg === 8) {
+    if (!values.pageFlg || values.pageFlg === 9) {
       var response = {}
       response = {
         flg: 1
@@ -142,6 +143,14 @@ export const judgement = (values) => dispatch => {
     if (values.pageFlg === 7) {
       response = {
         flg: 8,
+        route: values.route,
+        result: values.judge_result
+      }
+      return response
+    }
+    if (values.pageFlg === 8) {
+      response = {
+        flg: 9,
         route: values.route,
         result: values.judge_result
       }

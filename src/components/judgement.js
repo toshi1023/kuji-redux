@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
 import { judgement } from '../actions';
 import { error } from '../actions';
 import '../sass/kuji.scss';
 import ButtonAppBar from './design_parts/navbar';
 import SubDisplay from './design_parts/subDisplay';
 import JudgeButton from './design_parts/judge_button';
+import ConfirmLottery from './design_parts/confirm_lottery';
 
 class Judgement extends Component {
 
@@ -17,7 +17,8 @@ class Judgement extends Component {
     this.button = this.button.bind(this)
     this.result = this.result.bind(this)
     this.judgement = this.judgement.bind(this)
-    this.oneBack = this.oneBack.bind(this)
+    this.toStart = this.toStart.bind(this)
+    this.toStgame = this.toStgame.bind(this)
   }
 
   /* Judgementのメイン処理 */
@@ -92,9 +93,12 @@ class Judgement extends Component {
       return "Next"
   }
 
-  /* 戻るボタンを設定 */
-  oneBack() {
+  /* Linkボタンを設定 */
+  toStart() {
     this.props.history.push("/start")
+  }
+  toStgame() {
+    this.props.history.push("/stgame")
   }
   
   /* レンダー処理 */
@@ -104,37 +108,7 @@ class Judgement extends Component {
           <React.Fragment>
             <ButtonAppBar />
             <div className="body">
-              <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <div>
-                    通常確率：{this.props.lottery.nomal}
-                  </div>
-                  <div>
-                    高確率：{this.props.lottery.high}
-                  </div>
-                  <div>
-                    ST回数：{this.props.lottery.st}
-                  </div>
-                  <div>
-                    突入確率：{this.props.lottery.rush}
-                  </div>
-                </Grid>
-                <Grid item xs={6}>
-                  <div>
-                    出玉1：{this.props.lottery.reward1}発
-                  </div>
-                  <div>
-                    出玉2：{this.props.lottery.reward2}発
-                  </div>
-                  <div>
-                    振り分け1：{this.props.lottery.section1}%
-                  </div>
-                  <div>
-                    振り分け2：{this.props.lottery.section2}%
-                  </div>
-                </Grid>
-              </Grid>
-              <hr />
+              <ConfirmLottery lottery={this.props.lottery} />
               <div className="content-box">
                 {this.result()}
               </div>
@@ -142,7 +116,8 @@ class Judgement extends Component {
                 <Button variant="contained" color="primary" size="small" type="submit" onClick={this.judgement} disabled={ submitting } >{this.button()}</Button>
               </div>
               <hr />
-              <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.oneBack} disabled={ submitting } >戻る</Button>
+              <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.toStart} disabled={ submitting } >To nomal</Button>
+              <Button variant="outlined" color="primary" size="small" type="submit" onClick={this.toStgame} disabled={ submitting } >To ST</Button>
             </div>
           </React.Fragment>
       )

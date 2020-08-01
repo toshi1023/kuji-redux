@@ -16,8 +16,7 @@ export default (states = {}, action) => {
                 rush: action.response.rush,
                 reward1: action.response.reward1,
                 reward2: action.response.reward2,
-                section1: action.response.section1,
-                section2: action.response.section2
+                section: action.response.section
             }
         case NOMAL_LOTTERY:
             return {...states, 
@@ -41,6 +40,8 @@ export default (states = {}, action) => {
             return {...states, 
                 st_result: 'ST抽選結果：' + action.response.result + '連',
                 jackpot: action.response.jackpot,
+                section1: action.response.section1,
+                section2: action.response.section2,
                 resultFlg: 'st'
             }
         default:

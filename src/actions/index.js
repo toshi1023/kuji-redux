@@ -19,6 +19,7 @@ export const confirmLottery = (values) => dispatch => {
     dispatch({type: CONFIRM_LOTTERY, response})
 }
 
+/* 通常確率の抽選処理 */
 // values: 入力フォーム(Field)の値
 export const nomalLottery = (values) => dispatch => {
 
@@ -161,12 +162,14 @@ export const judgement = (values) => dispatch => {
   dispatch({type: JUDGEMENT, response})
 }
 
+/* ST抽選処理 */
 // values: 入力フォーム(Field)の値
 export const stLottery = (values) => dispatch => {
 
     var times
     var loop = 1
-    var i
+    var section1 = 0
+    var section2 = 0
     var jackpot = []
     var game_over
     
@@ -181,6 +184,14 @@ export const stLottery = (values) => dispatch => {
   
           if (high_lottery === 1) {
             loop++
+            var section = Math.floor( Math.random() * 100)
+            if (section <= values.section1) {
+              section1++
+            }
+            if(section > values.section1) {
+              section2++
+            }
+            
             console.log( times + "回転で" + loop + "連目の大当たりをGET" )
             break
           }
@@ -209,6 +220,11 @@ export const stLottery = (values) => dispatch => {
       return loop;    
     }
 
-    const response = {result: st_lottery(values), jackpot: jackpot}
+    const response = {
+      result: st_lottery(values), 
+      jackpot: jackpot, 
+      section1: section1, 
+      section2: section2
+    }
     dispatch({type: ST_LOTTERY, response})
 }

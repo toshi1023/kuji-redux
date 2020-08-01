@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import SettingGame from './components/setting_game';
 import RewardSetting from './components/reward_setting';
 import StartGame from './components/start_game';
+import StGame from './components/st_game';
 import Judgement from './components/judgement';
 import Display from './components/display'
 
@@ -27,6 +28,7 @@ ReactDOM.render(
               <Route exact path="/" component={SettingGame} />
               <Route exact path="/reward" component={RewardSetting} />
               <Route exact path="/start" component={StartGame} />
+              <Route exact path="/stgame" component={StGame} />
               <Route exact path="/judgement" component={Judgement} />
             </Display>
           </Switch>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import RewardSetting from './reward_setting';
 import SettingGame from './setting_game';
 import StartGame from './start_game';
+import StGame from './st_game';
 import Judgement from './judgement';
 import _ from 'lodash';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +24,9 @@ class Display extends Component {
         }
         if (window.location.pathname === '/start' ){
             return <StartGame />
+        }
+        if (window.location.pathname === '/stgame' ){
+            return <StGame />
         }
         if (window.location.pathname === '/judgement' ){
             return <Judgement />

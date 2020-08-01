@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField';
 import { confirmLottery } from '../actions';
 import ButtonAppBar from './design_parts/navbar';
-import start_game from './start_game';
 
 class RewardSetting extends Component {
 
@@ -46,7 +45,7 @@ class RewardSetting extends Component {
     render() {
       console.log(this.props.lottery)
       // ボタンのON,OFFカスタマイズ
-      const { handleSubmit, submitting } = this.props
+      const { handleSubmit, pristine, submitting, invalid } = this.props
 
       // handleSubmit: submitボタンが押下されたら引数に設定した処理を実行する関数
       return (
@@ -61,13 +60,20 @@ class RewardSetting extends Component {
                   <Field label="Reward2(出玉数)" type="text" name="reward2" placeholder="出玉数2" component={this.renderField} />
                 </div>
                 <div>
-                  <Field label="Section1(出玉振り分け%)" type="text" name="section1" placeholder="出玉振り分け1" component={this.renderField} />
+                  <Field label="Section(出玉振り分け(%))" type="text" name="section" placeholder="出玉振り分け" component={this.renderField} />
                 </div>
                 <div>
-                  <Field label="Section2(出玉振り分け%)" type="text" name="section2" placeholder="出玉振り分け2" component={this.renderField} />
+                  <Button variant="contained" color="primary" size="small" type="submit" disabled={pristine || submitting || invalid} >Confirm</Button>
                 </div>
-                <div>
-                  <Button variant="contained" color="primary" size="small" type="submit" disabled={submitting} >Confirm</Button>
+                <hr />
+                <div className="textColor">
+                  振り分けはReward1の振り分けとなります
+                </div>
+                <div className="textColor">
+                  Reward2の振り分けは、
+                </div>
+                <div className="textColor">
+                  100 - 入力値 となります
                 </div>
               </div>
             </form>
@@ -81,10 +87,9 @@ const validate = values => {
   const errors = {}
   
   // 数値入力以外を許さない
-  if (isNaN(parseInt(values.reward1))) errors.rush = "Enter a number, please."
-  if (isNaN(parseInt(values.reward2))) errors.rush = "Enter a number, please."
-  if (isNaN(parseInt(values.section1))) errors.rush = "Enter a number, please."
-  if (isNaN(parseInt(values.section2))) errors.rush = "Enter a number, please."
+  if (isNaN(parseInt(values.reward1))) errors.reward1 = "Enter a number, please."
+  if (isNaN(parseInt(values.reward2))) errors.reward2 = "Enter a number, please."
+  if (isNaN(parseInt(values.section)) && parseInt(values.section) <= 100) errors.section = "Enter a number, or under 100 please."
 
   return errors
 }
@@ -95,5 +100,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = ({confirmLottery})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
-  reduxForm({ validate, form: 'settingGameForm' })(RewardSetting)
+  reduxForm({ validate, form: 'rewardSettingForm' })(RewardSetting)
 ))

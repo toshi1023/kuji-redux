@@ -12,6 +12,7 @@ export default function SubDisplay(props) {
     }
 
     if(props) {
+        // Judgementの内容を表示
         if (props.result[0] === 8) {
 
             if (props.result[1] === "Congulaturation!!!") {
@@ -23,7 +24,24 @@ export default function SubDisplay(props) {
                 <p>Failure...</p>
             )
         }
+        // ST抽選の結果を表示
+        if (window.location.pathname === '/stgame' ){
+            return (
+                <>
+                    <div>
+                        {props.result[0]}
+                    </div>
+                    <div>
+                        {props.result[1]} : {props.result[1] * props.result[2]}発
+                    </div>
+                    <div>
+                        {props.result[3]} : {props.result[3] * props.result[4]}発
+                    </div>
+                </>
+            )
+        }
 
+        // 通常抽選の結果を表示
         return (
             <p>{props.result}</p>
         ) 

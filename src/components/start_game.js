@@ -17,6 +17,11 @@ class StartGame extends Component {
     this.result = this.result.bind(this)
     this.toStgame = this.toStgame.bind(this)
     this.toJudgement = this.toJudgement.bind(this)
+
+    // 入力値で不正なエラーがあった場合はTOPページへリダイレクト
+    if (this.props.lottery.error) {
+      this.props.history.push('/')
+    }
   }
 
   start() {
@@ -44,7 +49,6 @@ class StartGame extends Component {
     }
   }
     render() {
-      console.log(this.props.lottery)
       const { submitting } = this.props
         return (
             <React.Fragment>

@@ -27,6 +27,7 @@ class StGame extends Component {
       this.props.history.push('/')
     }
     if (this.props.lottery.st) {
+      console.log(this.props.lottery)
       this.props.stLottery(this.props.lottery)
     }
   }
@@ -54,7 +55,6 @@ class StGame extends Component {
     }
   }
     render() {
-      console.log(this.props.lottery)
       const { submitting } = this.props
         return (
             <React.Fragment>

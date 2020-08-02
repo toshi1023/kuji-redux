@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 const back = (props) => {
   // 現在のURLが条件
-  if (window.location.pathname === '/reward' || window.location.pathname === '/start' || window.location.pathname === '/judgement') {
+  if (window.location.pathname !== '/') {
       return (
           <Button variant="outlined" color="inherit" href="/">
               TOP
@@ -25,12 +25,14 @@ const back = (props) => {
       )
   }
 
-  return (
-        // 右寄せにするためにButtonタグでラッピング
-        <Button>
-          <ErrorMessage message={props}/>
-        </Button>
-      )
+  if (props) {
+    return (
+      // 右寄せにするためにButtonタグでラッピング
+      <Button>
+        <ErrorMessage message={props}/>
+      </Button>
+    )
+  }
 }
 
 export default function ButtonAppBar(props) {

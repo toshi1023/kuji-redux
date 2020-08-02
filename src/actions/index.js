@@ -15,6 +15,10 @@ export const error = () => dispatch => {
 /* 入力値をstateで管理する処理 */
 // values: 入力フォーム(Field)の値
 export const confirmLottery = (values) => dispatch => {
+    if (parseInt(values.section) >= 101) {
+      const response = "振り分けは100以下の数字で入力してください"
+      dispatch({type: ERROR, response})
+    }
     const response = values
     dispatch({type: CONFIRM_LOTTERY, response})
 }
@@ -167,7 +171,7 @@ export const judgement = (values) => dispatch => {
 export const stLottery = (values) => dispatch => {
 
     var times
-    var loop = 1
+    var loop = 0
     var section1 = 0
     var section2 = 0
     var jackpot = []
@@ -185,11 +189,13 @@ export const stLottery = (values) => dispatch => {
           if (high_lottery === 1) {
             loop++
             var section = Math.floor( Math.random() * 100)
-            if (section <= values.section1) {
+            if (section <= values.section) {
               section1++
+              return jackpot.push(times + "回転で" + section1 + "連目の" + values.reward1 + "発大当たりをGET")
             }
-            if(section > values.section1) {
+            if(section > values.section) {
               section2++
+              return jackpot.push(times + "回転で" + section2 + "連目の" + values.reward2 + "発大当たりをGET")
             }
             
             console.log( times + "回転で" + loop + "連目の大当たりをGET" )
@@ -203,8 +209,6 @@ export const stLottery = (values) => dispatch => {
           console.log(game_over)
           return;
         }
-
-        return jackpot.push(times + "回転で" + loop + "連目の大当たりをGET")
     }
 
     // game_overに値が入らない限りst_loopの処理を繰り返す

@@ -43,7 +43,6 @@ class RewardSetting extends Component {
     }
 
     render() {
-      console.log(this.props.lottery)
       // ボタンのON,OFFカスタマイズ
       const { handleSubmit, pristine, submitting, invalid } = this.props
 
@@ -89,8 +88,7 @@ const validate = values => {
   // 数値入力以外を許さない
   if (isNaN(parseInt(values.reward1))) errors.reward1 = "Enter a number, please."
   if (isNaN(parseInt(values.reward2))) errors.reward2 = "Enter a number, please."
-  if (isNaN(parseInt(values.section)) && parseInt(values.section) <= 100) errors.section = "Enter a number, or under 100 please."
-
+  if (isNaN(parseInt(values.section))) errors.section = "Enter a number, or under 100 please."
   return errors
 }
 

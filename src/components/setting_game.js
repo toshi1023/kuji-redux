@@ -6,14 +6,23 @@ import _ from 'lodash'
 import '../sass/kuji.scss';
 import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { confirmLottery } from '../actions';
 import ButtonAppBar from './design_parts/navbar';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class SettingGame extends Component {
 
     constructor(props) {
       super(props)
       this.onSubmit = this.onSubmit.bind(this)
+      this.handleClick = this.handleClick.bind(this)
+      this.handleClose = this.handleClose.bind(this)
+      this.state = {open: false}
     }
 
     renderField(field) {
@@ -30,6 +39,20 @@ class SettingGame extends Component {
           />
       )
     }
+    
+    // 警告用のSnackBarの設定
+    handleClick = () => {
+      this.setState(prevState => {
+        return { 
+          open: true,
+        };
+      });
+    };
+    handleClose = () => {
+      this.setState(prevState => {
+        return { open: false };
+      });
+    };
 
     onSubmit(values) {
         this.props.confirmLottery(values)
@@ -57,13 +80,18 @@ class SettingGame extends Component {
                   <Field label="St(ST回転数)" type="text" name="st" placeholder="ST回数" component={this.renderField} />
                 </div>
                 <div>
-                  <Field label="Rush(確変突入率)" type="text" name="rush" placeholder="突入確率" component={this.renderField} />
+                  <Field label="Rush(確変突入率)" type="text" name="rush" placeholder="突入確率" component={this.renderField} onChange={this.handleClick} />
                 </div>
                 <div>
                   <Button variant="contained" color="primary" size="small" type="submit" disabled={pristine || submitting || invalid} >Next</Button>
                 </div>
               </div>      
             </form>
+            <Snackbar open={this.state.open} autoHideDuration={8000} onClose={this.handleClose}>
+              <Alert onClose={this.handleClose} severity="warning">
+                出玉振り分けは100以下の数字で入力が必須です
+              </Alert>
+            </Snackbar>
           </React.Fragment>
       )
     }

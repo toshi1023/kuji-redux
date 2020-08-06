@@ -23,7 +23,7 @@ export default function ConfirmLottery(props) {
                     ST回数：{props.lottery.st}
                 </div>
                 <div>
-                    突入確率：{props.lottery.rush}
+                    突入確率：{props.lottery.rush}%
                 </div>
                 </Grid>
                 <Grid item xs={6}>

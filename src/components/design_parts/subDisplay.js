@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'react-image-resizer';
 import '../../sass/kuji.scss';
-import gif_garo from './gif_garo.gif';
+import gif_garo5 from './gif_garo5.gif';
 
 export default function SubDisplay(props) {
     if(props) {
@@ -11,7 +11,7 @@ export default function SubDisplay(props) {
             if (props.result[1] === "Congulaturation!!!") {
                 return (
                     <div className="content-inner">
-                        <Image src={gif_garo} alt="Gif_garo" height={270} width={300} />
+                        <Image src={gif_garo5} alt="Gif_garo" height={270} width={300} />
                     </div>   
                 )   
             }

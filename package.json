@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "kuji-redux",
   "version": "0.1.0",
   "private": true,

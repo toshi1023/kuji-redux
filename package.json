@@ -22,7 +22,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "node --experimental-modules ./src/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "react-scripts build",
     "eject": "react-scripts eject"

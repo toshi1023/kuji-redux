@@ -22,10 +22,6 @@ export default function SubDisplay(props) {
             )
         }
 
-        console.log(props)
-        console.log(props.result)
-        // console.log(props.st_result)
-        console.log(props.result.st)
         // ST抽選の結果を表示
         if (window.location.pathname === '/stgame' ){
             if (props.result.st === undefined) {

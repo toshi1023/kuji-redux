@@ -37,22 +37,22 @@ class Judgement extends Component {
   result() {
     if (this.props.lottery.resultFlg === "judgement") {
         if (this.props.lottery.pageFlg === 1) {
-            return <SubDisplay result={[this.props.lottery.start]} />
+            return <SubDisplay result={this.props.lottery.start} />
         }
         if (this.props.lottery.pageFlg === 2) {
-            return <SubDisplay result={[this.props.lottery.first]} />
+            return <SubDisplay result={this.props.lottery.first} />
         }
         if (this.props.lottery.pageFlg === 3) {
-            return <SubDisplay result={[this.props.lottery.second]} />
+            return <SubDisplay result={this.props.lottery.second} />
         }
         if (this.props.lottery.pageFlg === 4) {
-            return <SubDisplay result={[this.props.lottery.route]} />
+            return <SubDisplay result={this.props.lottery.route} />
         }
         if (this.props.lottery.pageFlg === 5) {
-            return <SubDisplay result={[this.props.lottery.third]} />
+            return <SubDisplay result={this.props.lottery.third} />
         }
         if (this.props.lottery.pageFlg === 6) {
-            return <SubDisplay result={[this.props.lottery.forth]} />
+            return <SubDisplay result={this.props.lottery.forth} />
         }
         if (this.props.lottery.pageFlg === 7) {
             // ボタン表示のタイプを分岐
@@ -77,10 +77,10 @@ class Judgement extends Component {
             )   
         }
         if (this.props.lottery.pageFlg === 8) {
-            return <SubDisplay result={[this.props.lottery.pageFlg, this.props.lottery.judge_result]} />
+            return <SubDisplay result={{flg: this.props.lottery.pageFlg, judge: this.props.lottery.judge_result}} />
         }           
         if (this.props.lottery.pageFlg === 9) {
-            return <SubDisplay result={[this.props.lottery.judge_result]} />
+            return <SubDisplay result={this.props.lottery.judge_result} />
         }           
     }
   }

@@ -15,11 +15,11 @@ export const error = () => dispatch => {
 /* 入力値をstateで管理する処理 */
 // values: 入力フォーム(Field)の値
 export const confirmLottery = (values) => dispatch => {
-    if (parseInt(values.rush) >= 101) {
+    if (parseInt(values.rush) > 100) {
       const response = "突入確率は100以下の数字で入力してください"
       dispatch({type: ERROR, response})
     }
-    if (parseInt(values.section) >= 101) {
+    if (parseInt(values.section) > 100) {
       const response = "振り分けは100以下の数字で入力してください"
       dispatch({type: ERROR, response})
     }

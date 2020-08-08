@@ -45,13 +45,13 @@ class StGame extends Component {
       return <SubDisplay result={this.props.lottery.nomal_result} />
     }
     if(this.props.lottery.resultFlg === "st") {
-      return <SubDisplay result={[
-        this.props.lottery.st_result, 
-        this.props.lottery.reward1, 
-        this.props.lottery.reward2, 
-        this.props.lottery.section1, 
-        this.props.lottery.section2
-      ]} />
+      return <SubDisplay result={{
+        'st': this.props.lottery.st_result, 
+        'reward1': this.props.lottery.reward1, 
+        'reward2': this.props.lottery.reward2, 
+        'section1': this.props.lottery.section1, 
+        'section2': this.props.lottery.section2
+      }} />
     }
   }
     render() {

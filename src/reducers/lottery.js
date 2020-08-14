@@ -1,5 +1,4 @@
 import { CONFIRM_LOTTERY, NOMAL_LOTTERY, ST_LOTTERY, ERROR, JUDGEMENT } from '../actions'
-import _ from 'lodash'
 
 export default (states = {}, action) => {
     // actionのタイプに応じて処理を分ける

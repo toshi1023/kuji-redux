@@ -70,33 +70,33 @@ class Display extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>
-                    <div className="iphone">
-                    <div className="iphone-top">
-                        <span className="camera"></span>
-                        <span className="sensor"></span>
-                        <span className="speaker"></span>
-                    </div>
-                    <div className="top-bar"></div>
-                    <div className="iphone-screen">
-                        {this.currentPage()}
-                    </div>
-                    <div className="buttons">
-                        <span className="on-off"></span>
-                        <span className="sleep"></span>
-                        <span className="up"></span>
-                        <span className="down"></span>
-                    </div>
-                    <div className="bottom-bar"></div>
-                    <div className="iphone-bottom">
-                        <span></span>
-                    </div>
-                    </div>
-                </div> 
-                <div className="body">
-                    <hr />
-                </div>
                 <Grid item xs={12}>
+                    <div>
+                        <div className="iphone">
+                        <div className="iphone-top">
+                            <span className="camera"></span>
+                            <span className="sensor"></span>
+                            <span className="speaker"></span>
+                        </div>
+                        <div className="top-bar"></div>
+                        <div className="iphone-screen">
+                            {this.currentPage()}
+                        </div>
+                        <div className="buttons">
+                            <span className="on-off"></span>
+                            <span className="sleep"></span>
+                            <span className="up"></span>
+                            <span className="down"></span>
+                        </div>
+                        <div className="bottom-bar"></div>
+                        <div className="iphone-bottom">
+                            <span></span>
+                        </div>
+                        </div>
+                    </div> 
+                    <div className="body">
+                        <hr />
+                    </div>
                     <div className="gameLog">
                         <h2>Game Log</h2>
                         {this.renderJackpots()}

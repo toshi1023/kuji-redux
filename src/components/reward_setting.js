@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import _ from 'lodash'
 import '../sass/kuji.scss';
 import Button from '@material-ui/core/Button';
 import TextField from 'material-ui/TextField';

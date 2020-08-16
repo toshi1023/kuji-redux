@@ -22,6 +22,8 @@ class RewardSetting extends Component {
       this.onSubmit = this.onSubmit.bind(this)
       this.handleClick = this.handleClick.bind(this)
       this.handleClose = this.handleClose.bind(this)
+      this.errorOpen = this.errorOpen.bind(this)
+      this.errorClose = this.errorClose.bind(this)
       this.rewardChange1 = this.rewardChange1.bind(this)
       this.rewardChange2 = this.rewardChange2.bind(this)
       
@@ -69,24 +71,39 @@ class RewardSetting extends Component {
         return { 
           open: true,
           section: e.target.value
-        };
-      });
-    };
+        }
+      })
+    }
     handleClose = () => {
       this.setState(prevState => {
-        return { open: false };
-      });
-    };
+        return { open: false }
+      })
+    }
+    // エラーメッセージ用のSnackBarの設定
+    errorOpen = () => {
+      this.setState(prevState => {
+        return { error: true }
+      })
+    }
+    errorClose = () => {
+      this.setState(prevState => {
+        return { error: false }
+      })
+    }
 
     onSubmit(values) {
-        // start_game.jsへ値を引き継げるように設定
-        values.nomal = this.props.lottery.nomal
-        values.high = this.props.lottery.high
-        values.st = this.props.lottery.st
-        values.rush = this.props.lottery.rush
+      // 出玉振り分けの割合が100以上の数値で入力していたらエラーをリターン
+      if(values.section > 100) {
+        return this.errorOpen()
+      }
+      // start_game.jsへ値を引き継げるように設定
+      values.nomal = this.props.lottery.nomal
+      values.high = this.props.lottery.high
+      values.st = this.props.lottery.st
+      values.rush = this.props.lottery.rush
 
-        this.props.confirmLottery(values)
-        this.props.history.push('/start')
+      this.props.confirmLottery(values)
+      this.props.history.push('/start')
     }
 
     render() {
@@ -117,6 +134,11 @@ class RewardSetting extends Component {
             <Snackbar open={this.state.open} autoHideDuration={8000} onClose={this.handleClose}>
               <Alert onClose={this.handleClose} severity="warning">
                 出玉振り分けは100以下の数字で入力が必須です
+              </Alert>
+            </Snackbar>
+            <Snackbar open={this.state.error} autoHideDuration={8000} onClose={this.errorClose}>
+              <Alert onClose={this.errorClose} severity="error">
+                出玉振り分けを100以下の数字で入力してください
               </Alert>
             </Snackbar>
           </React.Fragment>

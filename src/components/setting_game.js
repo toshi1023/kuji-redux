@@ -21,7 +21,9 @@ class SettingGame extends Component {
       this.onSubmit = this.onSubmit.bind(this)
       this.handleClick = this.handleClick.bind(this)
       this.handleClose = this.handleClose.bind(this)
-      this.state = {open: false}
+      this.errorOpen = this.errorOpen.bind(this)
+      this.errorClose = this.errorClose.bind(this)
+      this.state = {open: false, error: false}
     }
 
     renderField(field) {
@@ -42,18 +44,31 @@ class SettingGame extends Component {
     // 警告用のSnackBarの設定
     handleClick = () => {
       this.setState(prevState => {
-        return { 
-          open: true,
-        };
-      });
-    };
+        return { open: true }
+      })
+    }
     handleClose = () => {
       this.setState(prevState => {
-        return { open: false };
-      });
-    };
+        return { open: false }
+      })
+    }
+    // エラーメッセージ用のSnackBarの設定
+    errorOpen = () => {
+      this.setState(prevState => {
+        return { error: true }
+      })
+    }
+    errorClose = () => {
+      this.setState(prevState => {
+        return { error: false }
+      })
+    }
 
     onSubmit(values) {
+      // 確変突入率が100以上の数値で入力していたらエラーをリターン
+      if(values.rush > 100) {
+        return this.errorOpen()
+      }
         this.props.confirmLottery(values)
         this.props.history.push('/reward')
     }
@@ -88,7 +103,12 @@ class SettingGame extends Component {
             </form>
             <Snackbar open={this.state.open} autoHideDuration={8000} onClose={this.handleClose}>
               <Alert onClose={this.handleClose} severity="warning">
-                出玉振り分けは100以下の数字で入力が必須です
+                確変突入率は100以下の数字で入力が必須です
+              </Alert>
+            </Snackbar>
+            <Snackbar open={this.state.error} autoHideDuration={8000} onClose={this.errorClose}>
+              <Alert onClose={this.errorClose} severity="error">
+                確変突入率を100以下の数字で入力してください
               </Alert>
             </Snackbar>
           </React.Fragment>

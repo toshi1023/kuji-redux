@@ -9,6 +9,7 @@ export default (states = {}, action) => {
             // actions/index.jsからのresponseデータをリターン
             return {
                 ...states,
+                error: null,
                 nomal: action.response.nomal,
                 high: action.response.high,
                 st: action.response.st,
